@@ -1,5 +1,5 @@
 {% extends "../base.html" %} {% block content %}
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -156,87 +156,51 @@
                   <table class="table align-items-center mb-0">
                     <thead>
                       <tr>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                        {% comment %} <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th> {% endcomment %}
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Service Name</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Category</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Subcategory</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Type</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fees Amount</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Area</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">City</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">State</th>
-                        <th class="text-secondary opacity-7">ACTION</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Description</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Price</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Avaliable</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Image</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Invoice</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Booking date Invoice</th>
+                        {% comment %} <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">State</th> {% endcomment %}
+                        {% comment %} <th class="text-secondary opacity-7">ACTION</th> {% endcomment %}
                       </tr>
                     </thead>
                     <tbody>
-                      {% for service in services %}
+                      {% for item in items %}
 
                       <tr>
                         <td>
                           <div class="d-flex px-2 py-1">
-                            {% comment %} <div>
-                              <img
-                                src="../assets/img/team-2.jpg"
-                                class="avatar avatar-sm me-3"
-                                alt="user1"
-                              />
-                            </div> {% endcomment %}
                             <div class="d-flex flex-column justify-content-center">
-                              <h6 class="mb-0 text-sm">{{service.name}}</h6>
-                              <p class="text-xs text-secondary mb-0">manan21@gmail.com</p>
+                              <h6 class="mb-0 text-sm">{{item.title}}</h6>
+                              {% comment %} <p class="text-xs text-secondary mb-0">manan21@gmail.com</p> {% endcomment %}
                             </div>
                           </div>
                         </td>
                         <td>
-                          <p class="text-xs font-weight-bold mb-0">{{service.service_name}}</p>
+                          <p class="text-xs font-weight-bold mb-0">{{item.description}}</p>
                           
                         </td>
                         <td class="align-middle text-center text-sm">
-                          <span class="badge badge-sm bg-gradient-success">{{service.cat}}</span>
+                          <span class="badge badge-sm bg-gradient-success">{{item.price}}</span>
                         </td>
                         <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold">{{service.subcategory}}</span>
+                          <span class="text-secondary text-xs font-weight-bold">{{item.available}}</span>
                         </td>
                         <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold">{{service.type}}</span>
+                          <img src="{{ item.image.url }}" alt="{{ item.title }}" class="img-fluid">
                         </td>
+                        {% endfor %} 
+                        <td>
+
+
+                        </td>
+                        {% for book in booking %}
                         <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold">{{service.fees_amount}}</span>
-                        </td>
-                        <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold">{{service.area}}</span>
-                        </td>
-                        <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold">{{service.city}}</span>
-                        </td>
-                        <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold">{{service.state}}</span>
-                        </td>
-                        <td class="align-middle">
-                          <a
-                            href="javascript:;"
-                            class="text-secondary font-weight-bold text-xs"
-                            data-toggle="tooltip"
-                            data-original-title="Edit user"
-                          >
-                            EDIT
-                          </a>
-                          <a
-                            href="javascript:;"
-                            class="text-secondary font-weight-bold text-xs"
-                            data-toggle="tooltip"
-                            data-original-title="Edit user"
-                          >
-                            DETAIL
-                          </a>
-                          <a
-                            href="javascript:;"
-                            class="text-secondary font-weight-bold text-xs"
-                            data-toggle="tooltip"
-                            data-original-title="Edit user"
-                          >
-                            DELETE
-                          </a>
+                          <span class="text-secondary text-xs font-weight-bold">{{book.bdate}}</span>
                         </td>
                       </tr>
                       {% endfor %}
@@ -248,7 +212,37 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> 
+    {% comment %} <tbody>
+      {% for item in items %}
+      <tr>
+        <td>
+          <div class="d-flex px-2 py-1">
+            <div class="d-flex flex-column justify-content-center">
+              <h6 class="mb-0 text-sm">{{ item.title }}</h6>
+              <p class="text-xs text-secondary mb-0">manan21@gmail.com</p>
+            </div>
+          </div>
+        </td>
+        <td>
+          <p class="text-xs font-weight-bold mb-0">{{ item.description }}</p>
+        </td>
+        <td class="align-middle text-center text-sm">
+          <span class="badge badge-sm bg-gradient-success">Category</span>
+        </td>
+        <td class="align-middle text-center">
+          <span class="text-secondary text-xs font-weight-bold">{{ item.price }}</span>
+        </td>
+        <!-- Add more fields here according to your Item model -->
+        <td class="align-middle">
+          <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit item">EDIT</a>
+          <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Detail item">DETAIL</a>
+          <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete item">DELETE</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody> {% endcomment %}
+    
   </body>
 </html>
 {% endblock content %}
