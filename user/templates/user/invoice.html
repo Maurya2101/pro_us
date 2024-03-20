@@ -266,11 +266,14 @@ form{
       <button class="align-self-end card-link" type="submit"  data-bss-hover-animate="pulse" style="padding: 4px;background: #b86868;color: rgb(255,255,255);border-radius: 17px;padding-right: 14px;padding-left: 14px;padding-bottom: 6px;font-family: 'Source Sans Pro', sans-serif;margin-top: auto;box-shadow: 2px 2px 16px 1px rgba(117,117,117,0.8);">Pay Now</button>
     </form>
     
-    {% comment %} <form action="{% url ''  %}" method="post"> {% endcomment %}
-      {% comment %} {% csrf_token %} {% endcomment %}<br>
-      <button class="align-self-end card-link" type="submit" onclick = "window.print()"  data-bss-hover-animate="pulse" style="padding: 4px;background: #b86868;color: rgb(255,255,255);border-radius: 17px;padding-right: 14px;padding-left: 14px;padding-bottom: 6px;font-family: 'Source Sans Pro', sans-serif;margin-top: auto;box-shadow: 2px 2px 16px 1px rgba(117,117,117,0.8);">Print PDF</button>
-    {% comment %} </form> {% endcomment %}
-    
+      {% comment %} <button class="align-self-end card-link" type="submit" onclick = "window.print()"  data-bss-hover-animate="pulse" style="padding: 4px;background: #b86868;color: rgb(255,255,255);border-radius: 17px;padding-right: 14px;padding-left: 14px;padding-bottom: 6px;font-family: 'Source Sans Pro', sans-serif;margin-top: auto;box-shadow: 2px 2px 16px 1px rgba(117,117,117,0.8);">Print PDF</button> {% endcomment %}
+      {% comment %} <button class="align-self-end card-link" type="button" onclick="generateAndPrintPDF()" data-bss-hover-animate="pulse" style="padding: 4px;background: #b86868;color: rgb(255,255,255);border-radius: 17px;padding-right: 14px;padding-left: 14px;padding-bottom: 6px;font-family: 'Source Sans Pro', sans-serif;margin-top: auto;box-shadow: 2px 2px 16px 1px rgba(117,117,117,0.8);">Print PDF</button> {% endcomment %}
+      {% comment %} <a href="{% url 'invoice_pdf' invoice.id %}" target="_blank">Generate PDF</a> {% endcomment %}
+      <br><button class="align-self-end card-link" type="button" onclick="window.location.href='{% url 'invoice_pdf' invoice.id %}'" data-bss-hover-animate="pulse" style="padding: 4px;background: #b86868;color: rgb(255,255,255);border-radius: 17px;padding-right: 14px;padding-left: 14px;padding-bottom: 6px;font-family: 'Source Sans Pro', sans-serif;margin-top: auto;box-shadow: 2px 2px 16px 1px rgba(117,117,117,0.8);">Generate PDF</button>
+
+
+
+
       <div id="legalcopy">
         <p class="legal"><strong>Thank you for your business!</strong>  Payment is expected within 31 days; please process this invoice within that time. There will be a 5% interest charge per month on late invoices. 
         </p>
@@ -279,6 +282,9 @@ form{
     </div><!--End InvoiceBot-->
   </div><!--End Invoice-->
 </div><!-- End Invoice Holder-->
+
+
+  
   
   
   

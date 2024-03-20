@@ -12,6 +12,12 @@ from .models import User, Item, Booking, Invoice
 from .forms import CustomerRegistrationForm, ServiceproviderRegistrationForm, ProfileForm
 
 
+# Generate PDF
+from django.http import HttpResponse
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from io import BytesIO
 # Note: Ensure to import any other required models or forms.
 
 # User Registration for Customers
@@ -115,3 +121,44 @@ def payment(request):
     return render(request, 'user/payment.html')
 
 
+
+
+def invoice_pdf(request, invoice_id):
+    # Fetch the invoice and item objects
+    invoice = Invoice.objects.get(id=invoice_id)
+    item = invoice.booking.item
+    
+    # Create a buffer to store the PDF content
+    buffer = BytesIO()
+    
+    # Create a PDF document
+    doc = SimpleDocTemplate(buffer, pagesize=letter)
+    elements = []
+    
+    # Add content to the PDF
+    data = [
+        ["Item Description", "Hours", "Status", "Sub-total"],
+        [item.title, "2", invoice.status, str(item.price)]
+    ]
+    table = Table(data)
+    table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+    ]))
+    elements.append(table)
+    
+    # Build the PDF document
+    doc.build(elements)
+    
+    # Get PDF content from the buffer
+    pdf = buffer.getvalue()
+    buffer.close()
+    
+    # Create a HTTP response with PDF content
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="invoice_{invoice_id}.pdf"'
+    return response

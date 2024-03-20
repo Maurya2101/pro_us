@@ -162,8 +162,8 @@
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Price</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Avaliable</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Image</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Invoice</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Booking date Invoice</th>
+                        {% comment %} <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Invoice</th> {% endcomment %}
+                        {% comment %} <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Booking date Invoice</th> {% endcomment %}
                         {% comment %} <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">State</th> {% endcomment %}
                         {% comment %} <th class="text-secondary opacity-7">ACTION</th> {% endcomment %}
                       </tr>
@@ -194,16 +194,8 @@
                           <img src="{{ item.image.url }}" alt="{{ item.title }}" class="img-fluid">
                         </td>
                         {% endfor %} 
-                        <td>
-
-
-                        </td>
-                        {% for book in booking %}
-                        <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold">{{book.bdate}}</span>
-                        </td>
+                      
                       </tr>
-                      {% endfor %}
                     </tbody>
                   </table>
                 </div>
@@ -213,36 +205,6 @@
         </div>
       </div>
     </div> 
-    {% comment %} <tbody>
-      {% for item in items %}
-      <tr>
-        <td>
-          <div class="d-flex px-2 py-1">
-            <div class="d-flex flex-column justify-content-center">
-              <h6 class="mb-0 text-sm">{{ item.title }}</h6>
-              <p class="text-xs text-secondary mb-0">manan21@gmail.com</p>
-            </div>
-          </div>
-        </td>
-        <td>
-          <p class="text-xs font-weight-bold mb-0">{{ item.description }}</p>
-        </td>
-        <td class="align-middle text-center text-sm">
-          <span class="badge badge-sm bg-gradient-success">Category</span>
-        </td>
-        <td class="align-middle text-center">
-          <span class="text-secondary text-xs font-weight-bold">{{ item.price }}</span>
-        </td>
-        <!-- Add more fields here according to your Item model -->
-        <td class="align-middle">
-          <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit item">EDIT</a>
-          <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Detail item">DETAIL</a>
-          <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete item">DELETE</a>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody> {% endcomment %}
-    
-  </body>
+      </body>
 </html>
 {% endblock content %}
