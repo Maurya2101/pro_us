@@ -18,6 +18,7 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from io import BytesIO
+
 # Note: Ensure to import any other required models or forms.
 
 # User Registration for Customers
@@ -121,8 +122,6 @@ def payment(request):
     return render(request, 'user/payment.html')
 
 
-
-
 def invoice_pdf(request, invoice_id):
     # Fetch the invoice and item objects
     invoice = Invoice.objects.get(id=invoice_id)
@@ -140,6 +139,7 @@ def invoice_pdf(request, invoice_id):
         ["Item Description", "Hours", "Status", "Sub-total"],
         [item.title, "2", invoice.status, str(item.price)]
     ]
+    
     table = Table(data)
     table.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), colors.grey),

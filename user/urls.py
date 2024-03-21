@@ -27,7 +27,7 @@ urlpatterns = [
     # Service Booking and Invoices
     path('book-now/<int:item_id>/', views.book_now, name='book_now'),
     path('invoice/<int:invoice_id>/', views.show_invoice, name='show_invoice'),
-    path('invoice-pdf/<int:invoice_id>/', views.invoice_pdf, name='invoice_pdf'),
+    # path('invoice-pdf/<int:invoice_id>/', views.invoice_pdf, name='invoice_pdf'),
 
 
     
